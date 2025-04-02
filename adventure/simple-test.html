@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Game Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            overflow: hidden;
+        }
+        canvas {
+            border: 1px solid #333;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <script type="module">
+        import { Game } from './src/simple-game.js';
+        
+        window.onload = function() {
+            console.log("Window loaded, initializing simple game...");
+            try {
+                const game = new Game();
+                game.init();
+                game.start();
+            } catch (error) {
+                console.error("Error initializing simple game:", error);
+                document.body.innerHTML = '<div style="color: white; padding: 20px;">Error starting simple game. Check console for details.</div>';
+            }
+        };
+    </script>
+</body>
+</html>

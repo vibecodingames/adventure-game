@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Sprite Creator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 1px solid #000;
+            margin: 20px;
+            background-color: transparent;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Player Sprite Creator</h1>
+    <div class="controls">
+        <button id="drawMaleBtn">Draw Male Character</button>
+        <button id="drawFemaleBtn">Draw Female Character</button>
+        <button id="downloadBtn">Download Sprite</button>
+    </div>
+    <canvas id="spriteCanvas" width="50" height="100"></canvas>
+
+    <script>
+        const canvas = document.getElementById('spriteCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Clear canvas function
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        // Draw male character
+        function drawMaleCharacter() {
+            clearCanvas();
+            
+            // Head
+            ctx.fillStyle = '#FFD700'; // Blonde hair
+            ctx.fillRect(15, 5, 20, 10);
+            
+            ctx.fillStyle = '#FFC0CB'; // Face
+            ctx.fillRect(15, 15, 20, 15);
+            
+            // Eyes
+            ctx.fillStyle = '#000';
+            ctx.fillRect(20, 20, 3, 3);
+            ctx.fillRect(27, 20, 3, 3);
+            
+            // Mouth
+            ctx.fillRect(23, 25, 4, 2);
+            
+            // Body
+            ctx.fillStyle = '#0000FF'; // Blue shirt
+            ctx.fillRect(15, 30, 20, 30);
+            
+            // Arms
+            ctx.fillRect(5, 30, 10, 5);
+            ctx.fillRect(35, 30, 10, 5);
+            
+            // Legs
+            ctx.fillStyle = '#8B4513'; // Brown pants
+            ctx.fillRect(15, 60, 8, 35);
+            ctx.fillRect(27, 60, 8, 35);
+            
+            // Shoes
+            ctx.fillStyle = '#000';
+            ctx.fillRect(15, 95, 8, 5);
+            ctx.fillRect(27, 95, 8, 5);
+        }
+        
+        // Draw female character
+        function drawFemaleCharacter() {
+            clearCanvas();
+            
+            // Head
+            ctx.fillStyle = '#8B4513'; // Brown hair
+            ctx.fillRect(15, 5, 20, 15);
+            
+            ctx.fillStyle = '#FFC0CB'; // Face
+            ctx.fillRect(15, 15, 20, 15);
+            
+            // Eyes
+            ctx.fillStyle = '#000';
+            ctx.fillRect(20, 20, 3, 3);
+            ctx.fillRect(27, 20, 3, 3);
+            
+            // Mouth
+            ctx.fillRect(23, 25, 4, 2);
+            
+            // Body
+            ctx.fillStyle = '#FF69B4'; // Pink dress
+            ctx.fillRect(15, 30, 20, 40);
+            
+            // Arms
+            ctx.fillRect(5, 30, 10, 5);
+            ctx.fillRect(35, 30, 10, 5);
+            
+            // Legs
+            ctx.fillStyle = '#FFC0CB'; // Skin color legs
+            ctx.fillRect(15, 70, 8, 25);
+            ctx.fillRect(27, 70, 8, 25);
+            
+            // Shoes
+            ctx.fillStyle = '#FF0000'; // Red shoes
+            ctx.fillRect(15, 95, 8, 5);
+            ctx.fillRect(27, 95, 8, 5);
+        }
+        
+        // Download function
+        function downloadSprite() {
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = 'player.png';
+            link.href = dataURL;
+            link.click();
+        }
+        
+        // Event listeners
+        document.getElementById('drawMaleBtn').addEventListener('click', drawMaleCharacter);
+        document.getElementById('drawFemaleBtn').addEventListener('click', drawFemaleCharacter);
+        document.getElementById('downloadBtn').addEventListener('click', downloadSprite);
+        
+        // Draw default character on load
+        drawMaleCharacter();
+    </script>
+</body>
+</html>

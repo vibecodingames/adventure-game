@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beach Background Creator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 1px solid #000;
+            margin: 20px;
+        }
+        button {
+            padding: 10px;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Beach Background Creator</h1>
+    <canvas id="bgCanvas" width="800" height="600"></canvas>
+    <button id="downloadBtn">Download Background</button>
+
+    <script>
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw beach background
+        function drawBeach() {
+            // Sky
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, 300);
+            skyGradient.addColorStop(0, '#87CEEB');
+            skyGradient.addColorStop(1, '#E0F7FF');
+            ctx.fillStyle = skyGradient;
+            ctx.fillRect(0, 0, 800, 300);
+            
+            // Sun
+            ctx.fillStyle = '#FFFF00';
+            ctx.beginPath();
+            ctx.arc(700, 80, 50, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Ocean
+            const oceanGradient = ctx.createLinearGradient(0, 300, 0, 450);
+            oceanGradient.addColorStop(0, '#0077BE');
+            oceanGradient.addColorStop(1, '#4682B4');
+            ctx.fillStyle = oceanGradient;
+            ctx.fillRect(0, 300, 800, 150);
+            
+            // Beach
+            const sandGradient = ctx.createLinearGradient(0, 450, 0, 600);
+            sandGradient.addColorStop(0, '#F0E68C');
+            sandGradient.addColorStop(1, '#DEB887');
+            ctx.fillStyle = sandGradient;
+            ctx.fillRect(0, 450, 800, 150);
+            
+            // Palm tree
+            drawPalmTree(100, 450);
+            
+            // Boat
+            drawBoat(600, 350);
+            
+            // Seashell
+            drawSeashell(300, 500);
+        }
+        
+        function drawPalmTree(x, y) {
+            // Trunk
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(x - 10, y - 100, 20, 100);
+            
+            // Leaves
+            ctx.fillStyle = '#32CD32';
+            ctx.beginPath();
+            ctx.moveTo(x, y - 100);
+            ctx.lineTo(x - 50, y - 150);
+            ctx.lineTo(x - 40, y - 140);
+            ctx.lineTo(x, y - 100);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.moveTo(x, y - 100);
+            ctx.lineTo(x + 50, y - 150);
+            ctx.lineTo(x + 40, y - 140);
+            ctx.lineTo(x, y - 100);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.moveTo(x, y - 100);
+            ctx.lineTo(x - 30, y - 180);
+            ctx.lineTo(x - 20, y - 170);
+            ctx.lineTo(x, y - 100);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.moveTo(x, y - 100);
+            ctx.lineTo(x + 30, y - 180);
+            ctx.lineTo(x + 20, y - 170);
+            ctx.lineTo(x, y - 100);
+            ctx.fill();
+        }
+        
+        function drawBoat(x, y) {
+            // Boat hull
+            ctx.fillStyle = '#8B4513';
+            ctx.beginPath();
+            ctx.moveTo(x - 75, y);
+            ctx.lineTo(x + 75, y);
+            ctx.lineTo(x + 50, y + 30);
+            ctx.lineTo(x - 50, y + 30);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Mast
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(x - 5, y - 80, 10, 80);
+            
+            // Sail
+            ctx.fillStyle = '#FFFFFF';
+            ctx.beginPath();
+            ctx.moveTo(x, y - 80);
+            ctx.lineTo(x + 50, y - 40);
+            ctx.lineTo(x, y);
+            ctx.closePath();
+            ctx.fill();
+        }
+        
+        function drawSeashell(x, y) {
+            ctx.fillStyle = '#FFC0CB';
+            ctx.beginPath();
+            ctx.arc(x, y, 15, 0, Math.PI, true);
+            ctx.closePath();
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(x, y, 15, 0, Math.PI, false);
+            ctx.closePath();
+            ctx.fill();
+            
+            ctx.fillStyle = '#FFFFFF';
+            ctx.beginPath();
+            ctx.arc(x, y, 5, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fill();
+        }
+        
+        // Download function
+        function downloadBackground() {
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = 'beach_background.png';
+            link.href = dataURL;
+            link.click();
+        }
+        
+        // Event listeners
+        document.getElementById('downloadBtn').addEventListener('click', downloadBackground);
+        
+        // Draw beach on load
+        drawBeach();
+    </script>
+</body>
+</html>
